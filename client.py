@@ -29,5 +29,8 @@ class FlowerClient(fl.client.NumPyClient):
 
     def evaluate(self, parameters, config):
         self.set_parameters(parameters)
-        loss, accuracy = test(self.model, self.valloader, device=self.device)
-        return float(loss), len(self.valloader.dataset), {"accuracy": float(accuracy)}
+        # FIX: We now unpack THREE values (loss, accuracy, f1)
+        loss, accuracy, f1 = test(self.model, self.valloader, device=self.device)
+        
+        # FIX: We return the F1 score in the metrics dictionary
+        return float(loss), len(self.valloader.dataset), {"accuracy": float(accuracy), "f1_score": float(f1)}
