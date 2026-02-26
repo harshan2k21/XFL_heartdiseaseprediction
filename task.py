@@ -30,7 +30,7 @@ def train(model, trainloader, optimizer, epochs, device, mu):
         module=model,
         optimizer=optimizer,
         data_loader=trainloader,
-        noise_multiplier=1.1, # The amount of "fog" we add to protect identity
+        noise_multiplier=0.1, # The amount of "fog" we add to protect identity
         max_grad_norm=1.0,    # Caps the max influence of one patient
     )
     
